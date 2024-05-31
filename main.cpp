@@ -69,9 +69,32 @@ void isvestiZodziuSkaicius(const std::map<std::string, int>& zodziuSkaicius, con
     isvestiesSrautas.close();
 }
 
+void sukurtiLentele(const std::map<std::string, int>& zodziuSkaicius, const std::map<std::string, std::set<int>>& zodziuEilutes, const std::string& isvestiesFailas) {
+    std::ofstream isvestiesSrautas(isvestiesFailas + ".txt");
+
+    if (!isvestiesSrautas.is_open()) {
+        std::cerr << "Nepavyko atidaryti failo!" << std::endl;
+        return;
+    }
+
+    isvestiesSrautas << "Cross-reference lentelė žodžiams, kurie pasikartoja daugiau nei vieną kartą:\n";
+    for (const auto& pora : zodziuEilutes) {
+        if (zodziuSkaicius.at(pora.first) > 1) {
+            isvestiesSrautas << pora.first << " pasikartoja eilutėse: ";
+            for (const auto& eil : pora.second) {
+                isvestiesSrautas << eil << " ";
+            }
+            isvestiesSrautas << "\n";
+        }
+    }
+
+    isvestiesSrautas.close();
+}
+
 int main() {
     std::string ivestiesFailas;
-    std::string isvestiesFailas;
+    std::string zodziuSkaiciusIsvestiesFailas;
+    std::string lentelesIsvestiesFailas;
     std::map<std::string, int> zodziuSkaicius;
     std::map<std::string, std::set<int>> zodziuEilutes;
 
@@ -79,10 +102,14 @@ int main() {
     std::getline(std::cin, ivestiesFailas);
 
     std::cout << "Įveskite žodžių skaičiaus .txt failo pavadinimą: ";
-    std::getline(std::cin, isvestiesFailas);
+    std::getline(std::cin, zodziuSkaiciusIsvestiesFailas);
+
+    std::cout << "Įveskite cross-reference lentelės .txt failo pavadinimą: ";
+    std::getline(std::cin, lentelesIsvestiesFailas);
 
     apdorotiFaila(ivestiesFailas, zodziuSkaicius, zodziuEilutes);
-    isvestiZodziuSkaicius(zodziuSkaicius, isvestiesFailas);
+    isvestiZodziuSkaicius(zodziuSkaicius, zodziuSkaiciusIsvestiesFailas);
+    sukurtiLentele(zodziuSkaicius, zodziuEilutes, lentelesIsvestiesFailas);
 
     return 0;
 }
