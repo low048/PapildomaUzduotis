@@ -3,6 +3,7 @@
 #include <sstream>
 #include <string>
 #include <map>
+#include <set>
 #include <algorithm>
 
 bool arZodzioDalis(char c) {
@@ -17,15 +18,19 @@ std::string iMazasesRaides(const std::string& str) {
     return rezultatas;
 }
 
-void apdorotiFaila(const std::string& ivestiesFailas, std::map<std::string, int>& zodziuSkaicius) {
+void apdorotiFaila(const std::string& ivestiesFailas, std::map<std::string, int>& zodziuSkaicius, std::map<std::string, std::set<int>>& zodziuEilutes) {
     std::ifstream ivestiesSrautas(ivestiesFailas + ".txt");
+
     if (!ivestiesSrautas.is_open()) {
         std::cerr << "Nepavyko atidaryti failo!" << std::endl;
         return;
     }
 
     std::string eilute;
+    int eilutesNumeris = 0;
+
     while (getline(ivestiesSrautas, eilute)) {
+        ++eilutesNumeris;
         std::istringstream srautas(eilute);
         std::string zodis;
         while (srautas >> zodis) {
@@ -38,6 +43,7 @@ void apdorotiFaila(const std::string& ivestiesFailas, std::map<std::string, int>
             if (!isvalytasZodis.empty()) {
                 isvalytasZodis = iMazasesRaides(isvalytasZodis);
                 zodziuSkaicius[isvalytasZodis]++;
+                zodziuEilutes[isvalytasZodis].insert(eilutesNumeris);
             }
         }
     }
@@ -67,6 +73,7 @@ int main() {
     std::string ivestiesFailas;
     std::string isvestiesFailas;
     std::map<std::string, int> zodziuSkaicius;
+    std::map<std::string, std::set<int>> zodziuEilutes;
 
     std::cout << "Įveskite įvesties .txt failo pavadinimą: ";
     std::getline(std::cin, ivestiesFailas);
@@ -74,7 +81,7 @@ int main() {
     std::cout << "Įveskite žodžių skaičiaus .txt failo pavadinimą: ";
     std::getline(std::cin, isvestiesFailas);
 
-    apdorotiFaila(ivestiesFailas, zodziuSkaicius);
+    apdorotiFaila(ivestiesFailas, zodziuSkaicius, zodziuEilutes);
     isvestiZodziuSkaicius(zodziuSkaicius, isvestiesFailas);
 
     return 0;
