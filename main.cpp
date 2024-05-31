@@ -4,6 +4,7 @@
 #include <string>
 #include <map>
 #include <set>
+#include <vector>
 #include <algorithm>
 
 bool arZodzioDalis(char c) {
@@ -89,6 +90,19 @@ void sukurtiLentele(const std::map<std::string, int>& zodziuSkaicius, const std:
     }
 
     isvestiesSrautas.close();
+}
+
+bool patikrintiArURL(const std::string& zodis) {
+    const std::vector<std::string> domenai = { ".com", ".org", ".net", ".lt", ".edu", ".gov", ".uk", ".de", ".fr", ".it", ".ru", ".jp", ".cn" };
+    if (zodis.find("http://") == 0 || zodis.find("https://") == 0 || zodis.find("www.") == 0) {
+        return true;
+    }
+    for (const auto& domenas : domenai) {
+        if (zodis.size() > domenas.size() && zodis.substr(zodis.size() - domenas.size()) == domenas) {
+            return true;
+        }
+    }
+    return false;
 }
 
 int main() {
