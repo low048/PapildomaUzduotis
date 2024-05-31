@@ -20,7 +20,7 @@ std::string iMazasesRaides(const std::string& str) {
 }
 
 void apdorotiFaila(const std::string& ivestiesFailas, std::map<std::string, int>& zodziuSkaicius, std::map<std::string, std::set<int>>& zodziuEilutes) {
-    std::ifstream ivestiesSrautas(ivestiesFailas + ".txt");
+    std::ifstream ivestiesSrautas(ivestiesFailas);
 
     if (!ivestiesSrautas.is_open()) {
         std::cerr << "Nepavyko atidaryti failo!" << std::endl;
@@ -53,7 +53,7 @@ void apdorotiFaila(const std::string& ivestiesFailas, std::map<std::string, int>
 }
 
 void isvestiZodziuSkaicius(const std::map<std::string, int>& zodziuSkaicius, const std::string& isvestiesFailas) {
-    std::ofstream isvestiesSrautas(isvestiesFailas + ".txt");
+    std::ofstream isvestiesSrautas(isvestiesFailas);
 
     if (!isvestiesSrautas.is_open()) {
         std::cerr << "Nepavyko atidaryti failo!" << std::endl;
@@ -71,7 +71,7 @@ void isvestiZodziuSkaicius(const std::map<std::string, int>& zodziuSkaicius, con
 }
 
 void sukurtiLentele(const std::map<std::string, int>& zodziuSkaicius, const std::map<std::string, std::set<int>>& zodziuEilutes, const std::string& isvestiesFailas) {
-    std::ofstream isvestiesSrautas(isvestiesFailas + ".txt");
+    std::ofstream isvestiesSrautas(isvestiesFailas);
 
     if (!isvestiesSrautas.is_open()) {
         std::cerr << "Nepavyko atidaryti failo!" << std::endl;
@@ -106,8 +106,8 @@ bool patikrintiArURL(const std::string& zodis) {
 }
 
 void istrauktiURL(const std::string& ivestiesFailas, const std::string& isvestiesFailas) {
-    std::ifstream ivestiesSrautas(ivestiesFailas + ".txt");
-    std::ofstream isvestiesSrautas(isvestiesFailas + "_urls.txt");
+    std::ifstream ivestiesSrautas(ivestiesFailas);
+    std::ofstream isvestiesSrautas(isvestiesFailas);
 
     if (!ivestiesSrautas.is_open() || !isvestiesSrautas.is_open()) {
         std::cerr << "Nepavyko atidaryti failo!" << std::endl;
@@ -141,8 +141,6 @@ int main() {
     std::string zodziuSkaiciusIsvestiesFailas;
     std::string lentelesIsvestiesFailas;
     std::string urlIsvestiesFailas;
-    std::map<std::string, int> zodziuSkaicius;
-    std::map<std::string, std::set<int>> zodziuEilutes;
 
     std::cout << "Įveskite įvesties .txt failo pavadinimą: ";
     std::getline(std::cin, ivestiesFailas);
@@ -156,10 +154,20 @@ int main() {
     std::cout << "Įveskite URL išvesties .txt failo pavadinimą: ";
     std::getline(std::cin, urlIsvestiesFailas);
 
-    apdorotiFaila(ivestiesFailas, zodziuSkaicius, zodziuEilutes);
-    isvestiZodziuSkaicius(zodziuSkaicius, zodziuSkaiciusIsvestiesFailas);
-    sukurtiLentele(zodziuSkaicius, zodziuEilutes, lentelesIsvestiesFailas);
-    istrauktiURL(ivestiesFailas, urlIsvestiesFailas);
+    std::map<std::string, int> zodziuSkaicius;
+    std::map<std::string, std::set<int>> zodziuEilutes;
+
+    std::cout << "Išvedama..." << std::endl;
+
+    apdorotiFaila(ivestiesFailas + ".txt", zodziuSkaicius, zodziuEilutes);
+
+    isvestiZodziuSkaicius(zodziuSkaicius, zodziuSkaiciusIsvestiesFailas + ".txt");
+    sukurtiLentele(zodziuSkaicius, zodziuEilutes, lentelesIsvestiesFailas + ".txt");
+    istrauktiURL(ivestiesFailas + ".txt", urlIsvestiesFailas + ".txt");
+
+    std::cout << "Failai sėkmingai išvesti.";
+
+    std::cin.get();
 
     return 0;
 }
