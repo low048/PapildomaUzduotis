@@ -1,11 +1,18 @@
 ﻿#include <iostream>
 #include <fstream>
 #include <string>
+#include <algorithm>
 
 bool arZodzioDalis(char c) {
     return std::isalpha(static_cast<unsigned char>(c)) || 
            std::isdigit(static_cast<unsigned char>(c)) || 
            c == '-' || c == '_';
+}
+
+std::string iMazasesRaides(const std::string& str) {
+    std::string rezultatas = str;
+    std::transform(rezultatas.begin(), rezultatas.end(), rezultatas.begin(), ::tolower);
+    return rezultatas;
 }
 
 int main() {
