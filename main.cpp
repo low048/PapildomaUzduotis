@@ -45,18 +45,37 @@ void apdorotiFaila(const std::string& ivestiesFailas, std::map<std::string, int>
     ivestiesSrautas.close();
 }
 
+void isvestiZodziuSkaicius(const std::map<std::string, int>& zodziuSkaicius, const std::string& isvestiesFailas) {
+    std::ofstream isvestiesSrautas(isvestiesFailas + ".txt");
+
+    if (!isvestiesSrautas.is_open()) {
+        std::cerr << "Nepavyko atidaryti failo!" << std::endl;
+        return;
+    }
+
+    isvestiesSrautas << "Žodžiai, kurie pasikartoja daugiau nei vieną kartą:\n";
+    for (const auto& pora : zodziuSkaicius) {
+        if (pora.second > 1) {
+            isvestiesSrautas << pora.first << ": " << pora.second << "\n";
+        }
+    }
+
+    isvestiesSrautas.close();
+}
+
 int main() {
     std::string ivestiesFailas;
+    std::string isvestiesFailas;
     std::map<std::string, int> zodziuSkaicius;
 
     std::cout << "Įveskite įvesties .txt failo pavadinimą: ";
     std::getline(std::cin, ivestiesFailas);
 
-    apdorotiFaila(ivestiesFailas, zodziuSkaicius);
+    std::cout << "Įveskite žodžių skaičiaus .txt failo pavadinimą: ";
+    std::getline(std::cin, isvestiesFailas);
 
-    for (const auto& pora : zodziuSkaicius) {
-        std::cout << pora.first << ": " << pora.second << std::endl;
-    }
+    apdorotiFaila(ivestiesFailas, zodziuSkaicius);
+    isvestiZodziuSkaicius(zodziuSkaicius, isvestiesFailas);
 
     return 0;
 }
