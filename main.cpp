@@ -2,6 +2,12 @@
 #include <fstream>
 #include <string>
 
+bool arZodzioDalis(char c) {
+    return std::isalpha(static_cast<unsigned char>(c)) || 
+           std::isdigit(static_cast<unsigned char>(c)) || 
+           c == '-' || c == '_';
+}
+
 int main() {
     std::string ivestiesFailas;
 
