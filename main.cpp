@@ -8,9 +8,7 @@
 #include <algorithm>
 
 bool arZodzioDalis(char c) {
-    return std::isalpha(static_cast<unsigned char>(c)) || 
-           std::isdigit(static_cast<unsigned char>(c)) || 
-           c == '-' || c == '_';
+    return std::isalpha(static_cast<unsigned char>(c)) || std::isdigit(static_cast<unsigned char>(c));
 }
 
 std::string iMazasesRaides(const std::string& str) {
