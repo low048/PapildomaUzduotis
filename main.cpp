@@ -1,6 +1,8 @@
 ﻿#include <iostream>
 #include <fstream>
+#include <sstream>
 #include <string>
+#include <map>
 #include <algorithm>
 
 bool arZodzioDalis(char c) {
@@ -15,20 +17,46 @@ std::string iMazasesRaides(const std::string& str) {
     return rezultatas;
 }
 
+void apdorotiFaila(const std::string& ivestiesFailas, std::map<std::string, int>& zodziuSkaicius) {
+    std::ifstream ivestiesSrautas(ivestiesFailas + ".txt");
+    if (!ivestiesSrautas.is_open()) {
+        std::cerr << "Nepavyko atidaryti failo!" << std::endl;
+        return;
+    }
+
+    std::string eilute;
+    while (getline(ivestiesSrautas, eilute)) {
+        std::istringstream srautas(eilute);
+        std::string zodis;
+        while (srautas >> zodis) {
+            std::string isvalytasZodis;
+            for (char c : zodis) {
+                if (arZodzioDalis(c)) {
+                    isvalytasZodis += c;
+                }
+            }
+            if (!isvalytasZodis.empty()) {
+                isvalytasZodis = iMazasesRaides(isvalytasZodis);
+                zodziuSkaicius[isvalytasZodis]++;
+            }
+        }
+    }
+
+    ivestiesSrautas.close();
+}
+
 int main() {
     std::string ivestiesFailas;
+    std::map<std::string, int> zodziuSkaicius;
 
     std::cout << "Įveskite įvesties .txt failo pavadinimą: ";
     std::getline(std::cin, ivestiesFailas);
 
-    std::ifstream ivestiesSrautas(ivestiesFailas + ".txt");
-    if (!ivestiesSrautas.is_open()) {
-        std::cerr << "Nepavyko atidaryti failo!" << std::endl;
-        return 1;
+    apdorotiFaila(ivestiesFailas, zodziuSkaicius);
+
+    for (const auto& pora : zodziuSkaicius) {
+        std::cout << pora.first << ": " << pora.second << std::endl;
     }
 
-    std::cout << "Failas sėkmingai atidarytas." << std::endl;
-
-    ivestiesSrautas.close();
     return 0;
 }
