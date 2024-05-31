@@ -105,10 +105,42 @@ bool patikrintiArURL(const std::string& zodis) {
     return false;
 }
 
+void istrauktiURL(const std::string& ivestiesFailas, const std::string& isvestiesFailas) {
+    std::ifstream ivestiesSrautas(ivestiesFailas + ".txt");
+    std::ofstream isvestiesSrautas(isvestiesFailas + "_urls.txt");
+
+    if (!ivestiesSrautas.is_open() || !isvestiesSrautas.is_open()) {
+        std::cerr << "Nepavyko atidaryti failo!" << std::endl;
+        return;
+    }
+
+    std::string eilute;
+    std::set<std::string> nuorodos;
+
+    while (getline(ivestiesSrautas, eilute)) {
+        std::istringstream srautas(eilute);
+        std::string zodis;
+        while (srautas >> zodis) {
+            if (patikrintiArURL(zodis)) {
+                nuorodos.insert(zodis);
+            }
+        }
+    }
+
+    isvestiesSrautas << "Nuorodos, rastos tekste:\n";
+    for (const auto& url : nuorodos) {
+        isvestiesSrautas << url << "\n";
+    }
+
+    ivestiesSrautas.close();
+    isvestiesSrautas.close();
+}
+
 int main() {
     std::string ivestiesFailas;
     std::string zodziuSkaiciusIsvestiesFailas;
     std::string lentelesIsvestiesFailas;
+    std::string urlIsvestiesFailas;
     std::map<std::string, int> zodziuSkaicius;
     std::map<std::string, std::set<int>> zodziuEilutes;
 
@@ -121,9 +153,13 @@ int main() {
     std::cout << "Įveskite cross-reference lentelės .txt failo pavadinimą: ";
     std::getline(std::cin, lentelesIsvestiesFailas);
 
+    std::cout << "Įveskite URL išvesties .txt failo pavadinimą: ";
+    std::getline(std::cin, urlIsvestiesFailas);
+
     apdorotiFaila(ivestiesFailas, zodziuSkaicius, zodziuEilutes);
     isvestiZodziuSkaicius(zodziuSkaicius, zodziuSkaiciusIsvestiesFailas);
     sukurtiLentele(zodziuSkaicius, zodziuEilutes, lentelesIsvestiesFailas);
+    istrauktiURL(ivestiesFailas, urlIsvestiesFailas);
 
     return 0;
 }
