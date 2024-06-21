@@ -91,7 +91,7 @@ void sukurtiLentele(const std::map<std::string, int>& zodziuSkaicius, const std:
 }
 
 bool patikrintiArURL(const std::string& zodis) {
-    const std::vector<std::string> domenai = {".ac", ".ac.uk", ".ad", ".ae", ".aero", ".af", ".ag", ".ai", ".al", ".am", ".an", ".ao", ".aq", ".ar", ".arpa", ".as", ".asia", ".at", ".au", ".aw", ".ax", ".az", ".ba", ".bb", ".bd", ".be", ".bf", ".bg", ".bh", ".bi", ".biz", ".bj", ".bm", ".bn", ".bo", ".br", ".bs", ".bt", ".bv", ".bw", ".by", ".bz", ".ca", ".cat", ".cc", ".cd", ".cf", ".cg", ".ch", ".ci", ".ck", ".cl", ".cm", ".cn", ".co", ".co.uk", ".com", ".coop", ".cr", ".cs", ".cu", ".cv", ".cw", ".cx", ".cy", ".cz", ".dd", ".de", ".dj", ".dk", ".dm", ".do", ".dz", ".ec", ".edu", ".ee", ".eg", ".eh", ".er", ".es", ".et", ".eu", ".fi", ".firm", ".fj", ".fk", ".fm", ".fo", ".fr", ".fx", ".ga", ".gb", ".gd", ".ge", ".gf", ".gg", ".gh", ".gi", ".gl", ".gm", ".gn", ".gov", ".gov.uk", ".gp", ".gq", ".gr", ".gs", ".gt", ".gu", ".gw", ".gy", ".hk", ".hm", ".hn", ".hr", ".ht", ".hu", ".id", ".ie", ".il", ".im", ".in", ".info", ".int", ".io", ".iq", ".ir", ".is", ".it", ".je", ".jm", ".jo", ".jobs", ".jp", ".ke", ".kg", ".kh", ".ki", ".km", ".kn", ".kp", ".kr", ".kw", ".ky", ".kz", ".la", ".lb", ".lc", ".li", ".lk", ".lr", ".ls", ".lt", ".ltd.uk", ".lu", ".lv", ".ly", ".ma", ".mc", ".md", ".me", ".me.uk", ".mg", ".mh", ".mil", ".mk", ".ml", ".mm", ".mn", ".mo", ".mobi", ".mod.uk", ".mp", ".mq", ".mr", ".ms", ".mt", ".mu", ".museum", ".mv", ".mw", ".mx", ".my", ".mz", ".na", ".name", ".nato", ".nc", ".ne", ".net", ".net.uk", ".nf", ".ng", ".nhs.uk", ".ni", ".nl", ".no", ".nom", ".np", ".nr", ".nt", ".nu", ".nz", ".om", ".org", ".org.uk", ".pa", ".pe", ".pf", ".pg", ".ph", ".pk", ".pl", ".plc.uk", ".pm", ".pn", ".post", ".pr", ".pro", ".ps", ".pt", ".pw", ".py", ".qa", ".re", ".ro", ".rs", ".ru", ".rw", ".sa", ".sb", ".sc", ".sch.uk", ".sd", ".se", ".sg", ".sh", ".si", ".sj", ".sk", ".sl", ".sm", ".sn", ".so", ".sr", ".ss", ".st", ".store", ".su", ".sv", ".sy", ".sz", ".tc", ".td", ".tel", ".tf", ".tg", ".th", ".tj", ".tk", ".tl", ".tm", ".tn", ".to", ".tp", ".tr", ".travel", ".tt", ".tv", ".tw", ".tz", ".ua", ".ug", ".uk", ".um", ".us", ".uy", ".uz", ".va", ".vc", ".ve", ".vg", ".vi", ".vn", ".vu", ".web", ".wf", ".ws", ".xxx", ".ye", ".yt", ".yu", ".za", ".zm", ".zr", ".zw"};
+    const std::vector<std::string> domenai = {".ac", ".ac.uk", ".ad", ".ae", ".aero", ".af", ".ag", ".ai", ".al", ".am", ".an", ".ao", ".aq", ".ar", ".arpa", ".as", ".asia", ".at", ".au", ".aw", ".ax", ".az", ".ba", ".bb", ".bd", ".be", ".bf", ".bg", ".bh", ".bi", ".biz", ".bj", ".bm", ".bn", ".bo", ".br", ".bs", ".bt", ".bv", ".bw", ".by", ".bz", ".ca", ".cat", ".cc", ".cd", ".cf", ".cg", ".ch", ".ci", ".ck", ".cl", ".cm", ".cn", ".co", ".co.uk", ".com", ".coop", ".cr", ".cs", ".cu", ".cv", ".cw", ".cx", ".cy", ".cz", ".dd", ".de", ".dj", ".dk", ".dm", ".do", ".dz", ".ec", ".edu", ".ee", ".eg", ".eh", ".er", ".es", ".et", ".eu", ".fi", ".firm", ".fj", ".fk", ".fm", ".fo", ".fr", ".fx", ".ga", ".gb", ".gd", ".ge", ".gf", ".gg", ".gh", ".gi", ".gl", ".gm", ".gn", ".gov", ".gov.uk", ".gp", ".gq", ".gr", ".gs", ".gt", ".gu", ".gw", ".gy", ".hk", ".hm", ".hn", ".hr", ".ht", ".hu", ".id", ".ie", ".il", ".im", ".in", ".info", ".int", ".io", ".iq", ".ir", ".is", ".it", ".je", ".jm", ".jo", ".jobs", ".jp", ".ke", ".kg", ".kh", ".ki", ".km", ".kn", ".kp", ".kr", ".kw", ".ky", ".kz", ".la", ".lb", ".lc", ".li", ".lk", ".lr", ".ls", ".lt", ".ltd.uk", ".lu", ".lv", ".ly", ".ma", ".mc", ".md", ".me", ".me.uk", ".mg", ".mh", ".mil", ".mk", ".ml", ".mm", ".mn", ".mo", ".mobi", ".mod.uk", ".mp", ".mq", ".mr", ".ms", ".mt", ".mu", ".museum", ".mv", ".mw", ".mx", ".my", ".mz", ".na", ".name", ".nato", ".nc", ".ne", ".net", ".net.uk", ".nf", ".ng", ".nhs.uk", ".ni", ".nl", ".no", ".nom", ".np", ".nr", ".nt", ".nu", ".nz", ".om", ".org", ".org.uk", ".pa", ".pe", ".pf", ".pg", ".ph", ".pk", ".pl", ".plc.uk", ".pm", ".pn", ".post", ".pr", ".pro", ".ps", ".pt", ".pw", ".py", ".qa", ".re", ".ro", ".rs", ".ru", ".rw", ".sa", ".sb", ".sc", ".sch.uk", ".sd", ".se", ".sg", ".sh", ".si", ".sj", ".sk", ".sl", ".sm", ".sn", ".so", ".sr", ".ss", ".st", ".store", ".su", ".sv", ".sy", ".sz", ".tc", ".td", ".tel", ".tf", ".tg", ".th", ".tj", ".tk", ".tl", ".tm", ".tn", ".to", ".tp", ".tr", ".travel", ".tt", ".tv", ".tw", ".tz", ".ua", ".ug", ".uk", ".um", ".us", ".uy", ".uz", ".va", ".vc", ".ve", ".vg", ".vi", ".vn", ".vu", ".web", ".wf", ".ws", ".xxx", ".xyz", ".ye", ".yt", ".yu", ".za", ".zm", ".zr", ".zw"};
     if (zodis.find("http://") == 0 || zodis.find("https://") == 0 || zodis.find("www.") == 0) {
         return true;
     }
@@ -134,11 +134,51 @@ void istrauktiURL(const std::string& ivestiesFailas, const std::string& isvestie
     isvestiesSrautas.close();
 }
 
+void istrauktiMetus(const std::string& ivestiesFailas, const std::string& isvestiesFailas) {
+    std::ifstream ivestiesSrautas(ivestiesFailas);
+    std::ofstream isvestiesSrautas(isvestiesFailas);
+
+    if (!ivestiesSrautas.is_open() || !isvestiesSrautas.is_open()) {
+        std::cerr << "Nepavyko atidaryti failo!" << std::endl;
+        return;
+    }
+
+    std::string eilute;
+    std::set<std::string> metai;
+
+    while (getline(ivestiesSrautas, eilute)) {
+        size_t pos = 0;
+        while ((pos = eilute.find(" m.", pos)) != std::string::npos) {
+            size_t pirmasSkaitmuo = pos;
+            // einama atgal kol randamas pirmas skaitmuo
+            while (pirmasSkaitmuo > 0 && std::isdigit(eilute[pirmasSkaitmuo - 1])) {
+                --pirmasSkaitmuo;
+            }
+            // įtraukiami metai su " m."
+            if (pirmasSkaitmuo < pos) {
+                metai.insert(eilute.substr(pirmasSkaitmuo, pos - pirmasSkaitmuo + 3));
+            }
+            pos += 3;
+        }
+    }
+
+    isvestiesSrautas << "Metai, rasti tekste:\n";
+    for (const auto& met : metai) {
+        isvestiesSrautas << met << "\n";
+    }
+
+    ivestiesSrautas.close();
+    isvestiesSrautas.close();
+}
+
+
+
 int main() {
     std::string ivestiesFailas;
     std::string zodziuSkaiciusIsvestiesFailas;
     std::string lentelesIsvestiesFailas;
     std::string urlIsvestiesFailas;
+    std::string metuIsvestiesFailas;
 
     std::cout << "Įveskite įvesties .txt failo pavadinimą: ";
     std::getline(std::cin, ivestiesFailas);
@@ -152,16 +192,21 @@ int main() {
     std::cout << "Įveskite URL išvesties .txt failo pavadinimą: ";
     std::getline(std::cin, urlIsvestiesFailas);
 
+    std::cout << "Įveskite metų išvesties .txt failo pavadinimą: ";
+    std::getline(std::cin, metuIsvestiesFailas);
+
     std::map<std::string, int> zodziuSkaicius;
     std::map<std::string, std::set<int>> zodziuEilutes;
 
     std::cout << "Išvedama..." << std::endl;
 
     apdorotiFaila(ivestiesFailas + ".txt", zodziuSkaicius, zodziuEilutes);
-
     isvestiZodziuSkaicius(zodziuSkaicius, zodziuSkaiciusIsvestiesFailas + ".txt");
     sukurtiLentele(zodziuSkaicius, zodziuEilutes, lentelesIsvestiesFailas + ".txt");
+
     istrauktiURL(ivestiesFailas + ".txt", urlIsvestiesFailas + ".txt");
+    istrauktiMetus(ivestiesFailas + ".txt", metuIsvestiesFailas + ".txt");
+    
 
     std::cout << "Failai sėkmingai išvesti.";
 
